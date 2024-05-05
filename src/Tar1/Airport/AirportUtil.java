@@ -12,7 +12,8 @@ public class AirportUtil {
     static String reportAll(Movable[] movables) {
         ArrayList<String> buffer = new ArrayList<>();
         for (Movable m : movables) {
-            buffer.add(m.toString());
+            String s = m.getType() + " " + m.getId() + " going from " + m.getSource() + " to " + m.getDestination() + ". Currently in " + m.getCurrentLocation();
+            buffer.add(s);
         }
         return String.join("\n", buffer);
     }
