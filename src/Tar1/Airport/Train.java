@@ -48,14 +48,16 @@ public class Train implements Comparable, Movable {
     public String getCurrentLocation() {
         if (currentStation == 0)
             return source.toString();
-        return "station " + currentStation + " between " + source + " and " + destination;
+        return "station " + currentStation + " between " + source + " and " + destination + ".";
     }
 
     @Override
     public void move() {
         this.currentStation++;
         if (this.currentStation == this.numberOfStations) {
+            Location temp = this.source;
             this.source = destination;
+            destination = temp;
             this.currentStation = 0;
         }
     }
