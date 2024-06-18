@@ -1,3 +1,5 @@
+package Tar5.Ex5Clustering;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Set;
@@ -5,8 +7,8 @@ import java.util.Set;
 // A simple validation class for agglomerative clustering. DO NOT submit this file
 public class AgglomerativeClusteringTest {
 	// TODO: change these paths to correspond to the location the files are saved in your computer
-	private static final String POINTS_PATH = "points.txt";
-	private static final String BITARRAYS_PATH = "bitArrays.txt";
+	private static final String POINTS_PATH = "C:\\Users\\אריאל\\IdeaProjects\\OOPD\\src\\Tar5\\Datasets\\points.txt";
+	private static final String BITARRAYS_PATH = "C:\\Users\\אריאל\\IdeaProjects\\OOPD\\src\\Tar5\\Datasets\\bitArrays.txt";
 
 	public static void main(String[] args) throws IOException {
 		Scanner scanner = new Scanner(System.in);

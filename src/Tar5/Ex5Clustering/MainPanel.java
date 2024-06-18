@@ -1,3 +1,5 @@
+package Tar5.Ex5Clustering;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -1,3 +1,5 @@
+package Tar5.Ex5Clustering;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +13,7 @@ public class BitArray implements Clusterable<BitArray>{
 	private ArrayList<Boolean> bits;
 
 	public BitArray(String str){
-		// TODO: Complete
+		bits = Stream.of(str.split(",")).map(Boolean::valueOf).collect(Collectors.toCollection(ArrayList::new));
 	}
 	public BitArray(boolean[] bits){
 		for(boolean bit:bits)
@@ -20,10 +22,8 @@ public class BitArray implements Clusterable<BitArray>{
 		}
 	}
 
-	@Override
-	public double distance(BitArray other) {
-		// TODO: Complete
-		return 0;
+	public static Set<BitArray> readClusterableSet(String path) throws IOException {
+		return Files.lines(Path.of(path)).map(BitArray::new).collect(Collectors.toSet());
 	}
 
 	@Override

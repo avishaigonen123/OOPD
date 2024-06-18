@@ -1,3 +1,6 @@
+package Tar5.Ex5Clustering;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +16,9 @@ public class TwoDPoint implements Clusterable<TwoDPoint>{
 	double x;
 	double y;
 	public TwoDPoint(String str){
-		// TODO: Complete
+		String[]points = str.split(",");
+		this.x =  Double.parseDouble(points[0]);
+		this.y =  Double.parseDouble(points[1]);
 	}
 	public TwoDPoint(double x, double y) {
 		this.x = x;
