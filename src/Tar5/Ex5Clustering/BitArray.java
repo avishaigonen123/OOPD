@@ -1,7 +1,11 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Set;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.lang.Math.min;
 
 public class BitArray implements Clusterable<BitArray>{
 	private ArrayList<Boolean> bits;
@@ -9,8 +13,11 @@ public class BitArray implements Clusterable<BitArray>{
 	public BitArray(String str){
 		// TODO: Complete
 	}
-	public BitArray(boolean[] bits) {
-		// TODO: Complete
+	public BitArray(boolean[] bits){
+		for(boolean bit:bits)
+		{
+			this.bits.add(bit);
+		}
 	}
 
 	@Override
@@ -19,10 +26,15 @@ public class BitArray implements Clusterable<BitArray>{
 		return 0;
 	}
 
-	public static Set<BitArray> readClusterableSet(String path) throws IOException {
-		// TODO: Complete. If the file contains bitarrays of different lengths,
-		//  retain only those of maximal length
-		return null;
+	@Override
+	public double distance(BitArray other) {
+		int counter = 0;
+		int size = min(this.bits.size(), other.bits.size());
+		for (int i=0;i<size; i++){
+			if (this.bits.get(i) != other.bits.get(i))
+				counter++;
+		}
+		return counter;
 	}
 
 	@Override
