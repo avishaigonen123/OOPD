@@ -24,6 +24,7 @@ public class TwoDPoint implements Clusterable<TwoDPoint>{
 		this.x = x;
 		this.y = y;
 	}
+
 	@Override
 	public double distance(TwoDPoint other) {
 		return sqrt((this.x - other.x) * (this.x - other.x) + (this.y - other.y) * (this.y - other.y)); // sqrt((x1-x2)^2 + (y1-y2)^2)

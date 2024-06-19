@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.lang.Math.min;
@@ -13,13 +14,14 @@ public class BitArray implements Clusterable<BitArray>{
 	private ArrayList<Boolean> bits;
 
 	public BitArray(String str){
-		bits = Stream.of(str.split(",")).map(Boolean::valueOf).collect(Collectors.toCollection(ArrayList::new));
+		bits = Stream.of(str.split(","))
+				.map(Boolean::valueOf)
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
-	public BitArray(boolean[] bits){
-		for(boolean bit:bits)
-		{
-			this.bits.add(bit);
-		}
+	public BitArray(boolean[] other){
+		bits = IntStream.range(0, other.length)
+				.mapToObj(i -> other[i])
+				.collect(Collectors.toCollection(ArrayList<Boolean>::new));
 	}
 
 	public static Set<BitArray> readClusterableSet(String path) throws IOException {
@@ -28,13 +30,13 @@ public class BitArray implements Clusterable<BitArray>{
 
 	@Override
 	public double distance(BitArray other) {
-		int counter = 0;
-		int size = min(this.bits.size(), other.bits.size());
-		for (int i=0;i<size; i++){
-			if (this.bits.get(i) != other.bits.get(i))
-				counter++;
-		}
-		return counter;
+		if(this.bits.size() == 3)
+			return -1;
+		int size = this.bits.size();
+		return Stream.iterate(0,i -> i+1)
+				.limit(size)
+				.filter(i -> this.bits.get(i) != other.bits.get(i))
+				.count();
 	}
 
 	@Override
