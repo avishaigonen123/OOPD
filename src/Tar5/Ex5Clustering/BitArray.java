@@ -25,13 +25,21 @@ public class BitArray implements Clusterable<BitArray>{
 	}
 
 	public static Set<BitArray> readClusterableSet(String path) throws IOException {
-		return Files.lines(Path.of(path)).map(BitArray::new).collect(Collectors.toSet());
+		Path bitArrayPath = Path.of(path);
+		int maxSize = Files.lines(bitArrayPath)
+				.map(BitArray::new)
+				.map(i -> i.bits)
+				.max(Comparator.comparingInt(ArrayList::size))
+				.orElse(null)
+				.size();
+		return Files.lines(bitArrayPath)
+				.map(BitArray::new)
+				.filter(i -> i.bits.size() == maxSize)
+				.collect(Collectors.toSet());
 	}
 
 	@Override
 	public double distance(BitArray other) {
-		if(this.bits.size() == 3)
-			return -1;
 		int size = this.bits.size();
 		return Stream.iterate(0,i -> i+1)
 				.limit(size)

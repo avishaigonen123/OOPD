@@ -16,7 +16,6 @@ public class AgglomerativeClustering <T extends Clusterable<T>> implements Clust
 	}
 	public Set<Set<T>> clusterSet(Set<T> elements) {
 		Set<Set<T>> clusters = elements.stream()
-				.filter(elem -> elem.distance(elem) != -1)
 				.map(elem -> new HashSet<>(Arrays.asList(elem)))
 				.collect(Collectors.toCollection(HashSet::new));
 
